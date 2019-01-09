@@ -8,7 +8,15 @@ function main() {
 	"$@" &
 	local PID=$!
 	local MYPID=$$
+
+	if [[ $(uname -a) =~ Ubuntu ]]; then
+		trap "env kill -0 $PID && env kill -TERM -- $PID; exit 1" 1 2 3 15
+	else
+		trap "kill -0 $MYPID && kill -TERM -- -$MYPID;    exit 1" 1 2 3 15
+	fi
+
 	sleep $DURATION
+
 	# NOTE: below 'env' avoid to use shell builtin kill command
 	# NOTE: ubuntu OK
 	if [[ $(uname -a) =~ Ubuntu ]]; then
@@ -17,6 +25,7 @@ function main() {
 		# NOTE: darwin(mac), yocto OK
 		kill -0 $MYPID && kill -TERM -- -$MYPID
 	fi
+
 	wait
 }
 
