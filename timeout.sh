@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-{ [[ $# == 0 ]] || [[ $1 == '-h' ]] || [[ $1 == '-help' ]] || [[ $1 == '--help' ]]; } && echo "$0 "'DURATION COMMAND [ARG]...' && exit 1
+{ [[ $# == 0 ]] || [[ $# == 1 ]] || [[ $1 == '-h' ]] || [[ $1 == '-help' ]] || [[ $1 == '--help' ]]; } && echo "$0 "'DURATION COMMAND [ARG]...' && exit 1
 
 function main() {
 	local DURATION="$1"
